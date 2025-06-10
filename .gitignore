@@ -20,6 +20,7 @@
 *.user
 *.bak
 *.tmp
+*.csi
 
 # Archivos creados por el sistema
 Thumbs.db
