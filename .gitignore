@@ -20,7 +20,6 @@
 *.user
 *.bak
 *.tmp
-*.csi
 
 # Archivos creados por el sistema
 Thumbs.db
@@ -42,6 +41,8 @@ Desktop.ini
 
 # Archivos específicos de VB6
 *.vbw  # Contiene información del entorno, no necesaria
+*.csi
+*.lvw
 
 # Configuraciones del IDE (opcionales)
 *.scc
