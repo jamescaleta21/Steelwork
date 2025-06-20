@@ -19,7 +19,7 @@ Public Sub cancela_todo()
 Dim h As Integer
 nn = 2
 m_ind = 0
-Do Until Val(tra_llave(nn)) = 0 Or nn = 62 '
+Do Until val(tra_llave(nn)) = 0 Or nn = 62 '
 
 m_ind = m_ind + 1
 
@@ -66,7 +66,7 @@ If FORMGEN.Frame4.Visible = True Then
    fila = FORMGEN.grid_fac.rows - 1
     For h = 2 To fila
      If Trim(FORMGEN.grid_fac.TextMatrix(h, 1)) = "" Then GoTo PAS
-     If Val(FORMGEN.grid_fac.TextMatrix(h, 38)) = 0 Then
+     If val(FORMGEN.grid_fac.TextMatrix(h, 38)) = 0 Then
         FORMGEN.grid_fac.Row = h
         FORMGEN.grid_fac.RemoveItem h
         h = h - 1
@@ -321,7 +321,7 @@ For count = 1 To WS_ULT_FILA
     FORMGEN.grid_fac.COL = 2
     nom = FORMGEN.grid_fac.Text
     FORMGEN.grid_fac.COL = 8
-    cant = Val(FORMGEN.grid_fac.Text)
+    cant = val(FORMGEN.grid_fac.Text)
     FORMGEN.grid_fac.COL = 1
     cod = Trim(FORMGEN.grid_fac.Text)
     cod = ALINEA(cod)
@@ -336,9 +336,9 @@ For count = 1 To WS_ULT_FILA
     Print #1, cod; Spc(2); nom; Spc(1); cant; Spc(1); Prec; Spc(1); SP
  Next count
 wBruto = Format(FORMGEN.i_subtotal, "###,###,##0.00")
-wGastos = Format(Val(FORMGEN.i_gastos), "###,###,##0.00")
-wDescto = Format(Val(FORMGEN.i_descto), "###,###,##0.00")
-wImpto = Format(Val(FORMGEN.i_impto), "###,###,##0.00")
+wGastos = Format(val(FORMGEN.i_gastos), "###,###,##0.00")
+wDescto = Format(val(FORMGEN.i_descto), "###,###,##0.00")
+wImpto = Format(val(FORMGEN.i_impto), "###,###,##0.00")
 Print #1,
 Print #1,
 Print #1, String(70, "-")
@@ -484,6 +484,32 @@ Dim car
         End If
     End If
 End Sub
+
+Public Sub SOLO_DECIMAL_no_NEGATIVO(wsTexto As TextBox, Optional wsKeyAscii)
+    Dim car
+    car = Chr$(wsKeyAscii)
+    car = UCase$(Chr$(wsKeyAscii))
+    wsKeyAscii = Asc(car)
+    
+    ' Validación para el punto decimal
+    If wsKeyAscii = 46 Then
+      If InStr(1, wsTexto.Text, ".") <> 0 Then
+        Beep
+        wsKeyAscii = 0
+        Exit Sub
+      End If
+    End If
+    
+    ' Validación para otros caracteres (ahora sin permitir el "-")
+    If car < "0" Or car > "9" Then
+      If wsKeyAscii <> 8 And wsKeyAscii <> 13 And car <> "." Then
+          wsKeyAscii = 0
+          Beep
+          Exit Sub
+      End If
+    End If
+End Sub
+
 Public Sub SOLO_ENTERO(Optional tecla)
 
 Dim car As String, Longt As Integer
@@ -507,7 +533,7 @@ Dim enlace As Integer
 
 nn = 2
 m_ind = 0
-Do Until Val(tra_llave(nn)) = 0 Or nn = 62
+Do Until val(tra_llave(nn)) = 0 Or nn = 62
 m_ind = m_ind + 1
 ETIQUETAX(m_ind) = FORMGEN.LABELGEN(m_ind).Caption
 NUMERO = TABLA_TAG(tra_llave(nn))

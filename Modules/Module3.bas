@@ -306,12 +306,12 @@ Public par_MOV_NRO_MOV As Integer
    Public PSMANO_CODI As rdoQuery
    Public mano_CODI As rdoResultset
 Public PUB_TIPOPRINT As Integer
-   
-    
+     
 Public Sub CenterMe(frmForm As Form)
   frmForm.Left = (Screen.Width - frmForm.Width) / 2
   frmForm.Top = (Screen.Height - frmForm.Height) / 2
 End Sub
+
 
 
 Public Sub pasa_def()

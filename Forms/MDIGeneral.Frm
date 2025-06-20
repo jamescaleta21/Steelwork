@@ -1395,7 +1395,7 @@ fila = 0
 SQ_OPER = 0
 Do Until tab_mayor.EOF
  MDIForm1.SubmenuTit4(fila).Caption = "&" + Trim(tab_mayor!tab_NOMLARGO)
- If Val(tab_mayor!tab_nomcorto) = 1 Then
+ If val(tab_mayor!tab_nomcorto) = 1 Then
   MDIForm1.SubmenuTit4(fila).Visible = True
   MDIForm1.SubmenuTit4(fila + 1).Visible = True
   SQ_OPER = 9
@@ -1447,14 +1447,14 @@ Screen.MousePointer = 0
 If LK_EMP = "HER" Then
   wfecha = #12/1/2099#
   If LK_FECHA_DIA >= wfecha Then
-  If Val(GEN!GEN_CBS) <> -9 Then
+  If val(GEN!GEN_CBS) <> -9 Then
 sigue:
     WS = InputBox("Nº Serial es : " & Format(GEN!GEN_CFP, "0000000000000000") & " , Llame al proveedor y pida su nueva serie." & Chr(13) & "{Sí intenta colocar una serie que no es, por quinta vez... el Proveedor no responde por la información almacena.}", "Acceso Limitado ....")
     If WS = "" Then
       GoTo sigue
     End If
-    wserie = Val(WS)
-    If Val(PRO_DES(GEN!GEN_CFP)) = Val(wserie) Then
+    wserie = val(WS)
+    If val(PRO_DES(GEN!GEN_CFP)) = val(wserie) Then
        GEN.Edit
        GEN!GEN_CBS = -9
        GEN.Update
@@ -1518,7 +1518,7 @@ If Trim(menuAlm(index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(menuAlm(index).Caption, 4))
+pu_codtra = val(Left(menuAlm(index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1607,7 +1607,7 @@ If Trim(Menucomp(index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(Menucomp(index).Caption, 4))
+pu_codtra = val(Left(Menucomp(index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1647,7 +1647,7 @@ If Trim(MenuContab(index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(MenuContab(index).Caption, 4))
+pu_codtra = val(Left(MenuContab(index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1706,7 +1706,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menudis1(index).Caption, 4))
+pu_codtra = val(Left(menudis1(index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -1747,7 +1747,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menudis2(index).Caption, 4))
+pu_codtra = val(Left(menudis2(index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -1788,7 +1788,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menudis3(index).Caption, 4))
+pu_codtra = val(Left(menudis3(index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -1834,7 +1834,7 @@ If Trim(menuMoli(index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(menuMoli(index).Caption, 4))
+pu_codtra = val(Left(menuMoli(index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1918,7 +1918,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menuVent(index).Caption, 4))
+pu_codtra = val(Left(menuVent(index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -2003,9 +2003,14 @@ On Error GoTo SALE
 Select Case index
     Case 0
         Screen.MousePointer = 11
-        Load frmARTI
-        frmARTI.Show
-        'frmGuiaRemision.Show
+        'frmARTI.Show
+        frmMainCategoria.Show
+        frmMainResponsable.Show
+        frmMainProveedor.Show
+        frmMainUbicacion.Show
+        frmMainActivo.Show
+        frmMovimiento.Show
+        frmBajaActivo.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2558,10 +2563,10 @@ Select Case Button.key
            ElseIf UCase(Forms(iFormCount).Name) = "FRMPREUNIDAD" Then
                 FrmPreUnidad.PRO_GOTFOCUS
                 FrmPreUnidad.ListView1.Visible = False
-                FrmPreUnidad.txt_key.Text = ""
+                FrmPreUnidad.Txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FRMREPO" Then
                 FrmRepo.ListView1.Visible = False
-                FrmRepo.txt_key.Text = ""
+                FrmRepo.Txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FORMGEN" Then
                 FORMGEN.LV_ART.Visible = False
                 FORMGEN.TEXTOVAR.Text = ""

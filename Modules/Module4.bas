@@ -9,6 +9,8 @@ Public Enum Valores
     buscar
     AntesDeActualizar
     Eliminar           'LINEA NUEVA
+    Desactivar
+    Activar
 End Enum
 
 Public Declare Function DrawMenuBar Lib "User32" _
@@ -79,21 +81,21 @@ Frm.Controls(i).ListIndex = -1
 End Sub
 
 Public Sub ActivarControles(Frm As Form)
-'Dim J
-'For J = 0 To Frm.Controls.count - 1
-'    If TypeOf Frm.Controls(J) Is TextBox Then
-'        Frm.Controls(J).Enabled = True
-'    End If
-'    If TypeOf Frm.Controls(J) Is DataCombo Then
-'        Frm.Controls(J).Enabled = True
-'    End If
-'    If TypeOf Frm.Controls(J) Is ComboBox Then
-'        Frm.Controls(J).Enabled = True
-'    End If
-'     If TypeOf Frm.Controls(J) Is DTPicker Then
-'        Frm.Controls(J).Enabled = True
-'    End If
-'Next
+Dim j
+For j = 0 To Frm.Controls.count - 1
+    If TypeOf Frm.Controls(j) Is TextBox Then
+        Frm.Controls(j).Enabled = True
+    End If
+    If TypeOf Frm.Controls(j) Is DataCombo Then
+        Frm.Controls(j).Enabled = True
+    End If
+    If TypeOf Frm.Controls(j) Is ComboBox Then
+        Frm.Controls(j).Enabled = True
+    End If
+     If TypeOf Frm.Controls(j) Is DTPicker Then
+        Frm.Controls(j).Enabled = True
+    End If
+Next
 End Sub
 
 Public Function Mayusculas(Caracter As Integer) As Integer
@@ -108,9 +110,9 @@ For j = 0 To Frm.Controls.count - 1
     If TypeOf Frm.Controls(j) Is TextBox And Frm.Controls(j).Tag = "X" Then
         Frm.Controls(j).Enabled = False
     End If
-'    If TypeOf Frm.Controls(J) Is DataCombo Then
-'        Frm.Controls(J).Enabled = False
-'    End If
+    If TypeOf Frm.Controls(j) Is DataCombo Then
+        Frm.Controls(j).Enabled = False
+    End If
     If TypeOf Frm.Controls(j) Is ComboBox Then
         Frm.Controls(j).Enabled = False
     End If
