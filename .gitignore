@@ -34,7 +34,6 @@ Desktop.ini
 # Archivos de instalación y empaquetado
 *.cab
 *.msi
-*.zip
 *.bat
 *.log
 *.iss
