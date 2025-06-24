@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H00E0E0E0&
    Caption         =   "Solution-Modulo de Gestion Comercial"
@@ -524,32 +524,35 @@ Begin VB.MDIForm MDIForm1
       End
    End
    Begin VB.Menu menugrifo 
-      Caption         =   "&Grifos"
+      Caption         =   "&Modulo de Activos"
       Enabled         =   0   'False
-      Visible         =   0   'False
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Definición de Turnos"
+         Caption         =   "&Categorias"
          Index           =   0
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Islas y Responsables"
+         Caption         =   "&Responsables"
          Index           =   1
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Parte Diario de Grifero"
+         Caption         =   "&Proveedores"
          Index           =   2
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Stock por Regla"
+         Caption         =   "&Ubicacion"
          Index           =   3
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "-"
+         Caption         =   "&Activos"
          Index           =   4
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Transacciones II"
+         Caption         =   "&Movimientos"
          Index           =   5
+      End
+      Begin VB.Menu submenugrifo 
+         Caption         =   "Baja de Activos"
+         Index           =   6
       End
    End
    Begin VB.Menu menutit3 
@@ -1960,37 +1963,27 @@ End Sub
 Private Sub submenugrifo_Click(index As Integer)
 Select Case index
 Case 0
-    Screen.MousePointer = 11
-    PUB_TIPREG = 2102
-    PUB_CODCIA = LK_CODCIA
-    Load FrmDatArti
-    FrmDatArti.Caption = "TURNOS DE GRIFOS -  TAB_TIPREG = " & PUB_TIPREG
-    Screen.MousePointer = 0
-    FrmDatArti.Show 1
+    
+    frmMainCategoria.Show
 Case 1
-    Screen.MousePointer = 11
-    Load Frmislas
-    Frmislas.Show
-    Screen.MousePointer = 0
-    Exit Sub
+    
+    frmMainResponsable.Show
 Case 2
-    Screen.MousePointer = 11
-    Load frmPARTE
-    frmPARTE.Show
-    Screen.MousePointer = 0
-    Exit Sub
+    
+    frmMainProveedor.Show
 Case 3
-    Screen.MousePointer = 11
-    Load frmStockG
-    Screen.MousePointer = 0
-    frmStockG.Show 1
-    Exit Sub
+    
+    frmMainUbicacion.Show
+Case 4
+   
+    frmMainActivo.Show
 Case 5
-    Screen.MousePointer = 11
-    Load FORM_GRIFO
-    FORM_GRIFO.Show
-    Screen.MousePointer = 0
-    Exit Sub
+    
+     frmMovimiento.Show
+Case 6
+    
+    frmBajaActivo.Show
+    
 End Select
 
 
@@ -2003,14 +1996,7 @@ On Error GoTo SALE
 Select Case index
     Case 0
         Screen.MousePointer = 11
-        'frmARTI.Show
-        frmMainCategoria.Show
-        frmMainResponsable.Show
-        frmMainProveedor.Show
-        frmMainUbicacion.Show
-        frmMainActivo.Show
-        frmMovimiento.Show
-        frmBajaActivo.Show
+        frmARTI.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2563,10 +2549,10 @@ Select Case Button.key
            ElseIf UCase(Forms(iFormCount).Name) = "FRMPREUNIDAD" Then
                 FrmPreUnidad.PRO_GOTFOCUS
                 FrmPreUnidad.ListView1.Visible = False
-                FrmPreUnidad.Txt_key.Text = ""
+                FrmPreUnidad.txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FRMREPO" Then
                 FrmRepo.ListView1.Visible = False
-                FrmRepo.Txt_key.Text = ""
+                FrmRepo.txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FORMGEN" Then
                 FORMGEN.LV_ART.Visible = False
                 FORMGEN.TEXTOVAR.Text = ""
