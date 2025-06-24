@@ -68,7 +68,7 @@ BEGIN
                'X'
         FROM sw.ACTIVO a
         WHERE a.codCia = @codCia
-              AND a.codigoActivo = @codigoActivo
+              AND a.codigoActivo = @codigoActivo AND COALESCE(a.eliminado,0) = 0
     )
     BEGIN
         SET @message = 'Codigo ingresado existente.';
@@ -82,7 +82,7 @@ BEGIN
                'X'
         FROM sw.ACTIVO a
         WHERE a.codCia = @codCia
-              AND a.descripcion = @descripcion
+              AND a.descripcion = @descripcion AND COALESCE(a.eliminado,0) = 0
     )
     BEGIN
         SET @message = 'Descripcion ingresada existente.';

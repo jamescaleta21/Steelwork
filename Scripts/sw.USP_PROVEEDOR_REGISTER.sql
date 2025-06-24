@@ -40,6 +40,7 @@ BEGIN
         FROM sw.PROVEEDOR p
         WHERE p.codCia = @codCia
               AND p.razonSocial = @razonSocial
+              AND COALESCE(p.eliminado, 0) = 0
     )
     BEGIN
         SET @message = 'Razón Social ingresada existente.';

@@ -74,35 +74,38 @@ Begin VB.Form frmMainResponsable
       _ExtentY        =   8705
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Responsable"
       TabPicture(0)   =   "frmMainResponsable.frx":0ECA
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtNombres"
-      Tab(0).Control(1)=   "txtApellidos"
-      Tab(0).Control(2)=   "ComActivo"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Label4"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "lblResponsableId"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "Label3"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label5"
-      Tab(0).Control(4)=   "Label2"
-      Tab(0).Control(5)=   "Label3"
-      Tab(0).Control(6)=   "lblResponsableId"
-      Tab(0).Control(7)=   "Label4"
+      Tab(0).Control(3)=   "Label2"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).Control(4)=   "Label5"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "ComActivo"
+      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).Control(6)=   "txtApellidos"
+      Tab(0).Control(6).Enabled=   0   'False
+      Tab(0).Control(7)=   "txtNombres"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).ControlCount=   8
       TabCaption(1)   =   "Listado"
       TabPicture(1)   =   "frmMainResponsable.frx":0EE6
-      Tab(1).ControlEnabled=   -1  'True
-      Tab(1).Control(0)=   "Label1"
-      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "lvListado"
       Tab(1).Control(1)=   "txtSearch"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "lvListado"
-      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(2)=   "Label1"
       Tab(1).ControlCount=   3
       Begin VB.TextBox txtNombres 
          Height          =   300
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   4
          Tag             =   "X"
          Top             =   2760
@@ -110,7 +113,7 @@ Begin VB.Form frmMainResponsable
       End
       Begin VB.TextBox txtApellidos 
          Height          =   300
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   3
          Tag             =   "X"
          Top             =   2160
@@ -119,7 +122,7 @@ Begin VB.Form frmMainResponsable
       Begin VB.ComboBox ComActivo 
          Height          =   315
          ItemData        =   "frmMainResponsable.frx":0F02
-         Left            =   -71160
+         Left            =   3840
          List            =   "frmMainResponsable.frx":0F0C
          Style           =   2  'Dropdown List
          TabIndex        =   5
@@ -129,7 +132,7 @@ Begin VB.Form frmMainResponsable
       End
       Begin MSComctlLib.ListView lvListado 
          Height          =   3855
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   2
          Top             =   960
          Width           =   9015
@@ -149,7 +152,7 @@ Begin VB.Form frmMainResponsable
       End
       Begin VB.TextBox txtSearch 
          Height          =   300
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   1
          Top             =   600
          Width           =   8175
@@ -159,7 +162,7 @@ Begin VB.Form frmMainResponsable
          BackStyle       =   0  'Transparent
          Caption         =   "Nombres:"
          Height          =   195
-         Left            =   -72135
+         Left            =   2865
          TabIndex        =   12
          Top             =   2813
          Width           =   840
@@ -169,7 +172,7 @@ Begin VB.Form frmMainResponsable
          BackStyle       =   0  'Transparent
          Caption         =   "Responsable ID:"
          Height          =   195
-         Left            =   -72720
+         Left            =   2280
          TabIndex        =   11
          Top             =   1620
          Width           =   1425
@@ -179,7 +182,7 @@ Begin VB.Form frmMainResponsable
          BackStyle       =   0  'Transparent
          Caption         =   "Apellidos:"
          Height          =   195
-         Left            =   -72135
+         Left            =   2865
          TabIndex        =   10
          Top             =   2213
          Width           =   840
@@ -190,7 +193,7 @@ Begin VB.Form frmMainResponsable
          BorderStyle     =   1  'Fixed Single
          ForeColor       =   &H80000008&
          Height          =   300
-         Left            =   -71175
+         Left            =   3825
          TabIndex        =   9
          Tag             =   "X"
          Top             =   1560
@@ -201,7 +204,7 @@ Begin VB.Form frmMainResponsable
          BackStyle       =   0  'Transparent
          Caption         =   "Activo:"
          Height          =   195
-         Left            =   -71895
+         Left            =   3105
          TabIndex        =   8
          Top             =   3420
          Width           =   600
@@ -211,7 +214,7 @@ Begin VB.Form frmMainResponsable
          BackStyle       =   0  'Transparent
          Caption         =   "Search:"
          Height          =   195
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   6
          Top             =   600
          Width           =   675
@@ -327,7 +330,7 @@ Private Sub responsableSearch(xdato As String)
         Dim itemX As Object
 
         Do While Not oRSmain.EOF
-            Set itemX = Me.lvListado.ListItems.Add(, , oRSmain!responsableId, Me.iResponsable.ListImages(1).key, Me.iResponsable.ListImages(8).key)
+            Set itemX = Me.lvListado.ListItems.Add(, , oRSmain!responsableid, Me.iResponsable.ListImages(1).key, Me.iResponsable.ListImages(8).key)
             itemX.SubItems(1) = oRSmain!apellidos
             itemX.SubItems(2) = oRSmain!nombres
             itemX.SubItems(3) = oRSmain!activo
@@ -640,6 +643,10 @@ If KeyAscii = vbKeyReturn Then
     Me.txtNombres.SelLength = Len(Me.txtNombres.Text)
     Me.txtNombres.SetFocus
 End If
+End Sub
+
+Private Sub txtNombres_KeyPress(KeyAscii As Integer)
+KeyAscii = Mayusculas(KeyAscii)
 End Sub
 
 Private Sub txtSearch_KeyPress(KeyAscii As Integer)

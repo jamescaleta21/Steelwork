@@ -5,58 +5,50 @@ IF EXISTS
     FROM INFORMATION_SCHEMA.ROUTINES s
     WHERE s.ROUTINE_TYPE = 'PROCEDURE' -- Validación del tipo
           AND ROUTINE_SCHEMA = 'sw' -- Validación del esquema
-          AND s.ROUTINE_NAME = 'USP_MOVIMIENTO_SEARCH'
+          AND s.ROUTINE_NAME = 'USP_MOVIMIENTO_PRINT'
 ) -- Validación del nombre
 BEGIN
-    DROP PROC [sw].[USP_MOVIMIENTO_SEARCH];
+    DROP PROC [sw].[USP_MOVIMIENTO_PRINT];
 END;
 GO
 /*
-sw.USP_MOVIMIENTO_SEARCH '01',3
+sw.USP_MOVIMIENTO_PRINT '01',3
 */
-CREATE PROCEDURE [sw].[USP_MOVIMIENTO_SEARCH]
+CREATE PROCEDURE [sw].[USP_MOVIMIENTO_PRINT]
     @codcia CHAR(2),
-    @activoId INT
+    @activoid INT
 WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT u.denominacion AS 'ubicacion', a.responsableId
-    FROM sw.ACTIVO a WITH (NOLOCK)
-        INNER JOIN sw.UBICACION u WITH (NOLOCK)
-            ON u.codCia = a.codCia
-               AND u.ubicacionId = a.ubicacionId
-    WHERE a.codCia = @codcia
-          AND a.activoId = @activoId;
 
-    -- Ubicación inicial
-    SELECT NULL AS movimientoId,
-           al.fechaIngreso AS fechaMovimiento,
-           NULL AS ResponsableOrigen,
-           NULL AS ResponsableDestino,
+    SELECT CONVERT(VARCHAR(10), al.fechaIngreso, 103) AS fechaMovimiento,
+           '' AS ResponsableOrigen,
+           '' AS ResponsableDestino,
            u.denominacion AS ubicacion,
            'UBICACIÓN INICIAL' AS tipoMovimiento,
            al.feRegistro,
-           al.cuRegistro
+           al.cuRegistro,
+           '' AS obs
     FROM sw.ACTIVOLOG al
         LEFT JOIN sw.UBICACION u
             ON u.codCia = al.codCia
                AND u.ubicacionId = al.ubicacionId
     WHERE al.codCia = @codcia
-          AND al.activoId = @activoId
+          AND al.activoId = @activoid
           AND al.logId = 1
     UNION ALL
 
     -- Movimientos posteriores
-    SELECT m.movimientoId,
-           m.fechaMovimiento,
+    SELECT CONVERT(VARCHAR(10), m.fechaMovimiento, 103),
            r.apellidos + ' ' + r.nombres AS ResponsableOrigen,
            r2.apellidos + ' ' + r2.nombres AS ResponsableDestino,
            u.denominacion AS ubicacion,
            'TRASLADO' AS tipoMovimiento,
            m.feRegistro,
-           m.cuRegistro
+           m.cuRegistro,
+           COALESCE(m.observacion, '') AS obs
     FROM sw.MOVIMIENTO m WITH (NOLOCK)
         INNER JOIN sw.ACTIVO a WITH (NOLOCK)
             ON m.codCia = a.codCia
@@ -71,11 +63,7 @@ BEGIN
             ON m.codCia = u.codCia
                AND m.ubicacionId = u.ubicacionId
     WHERE m.codCia = @codcia
-          AND m.activoId = @activoId
-    ORDER BY al.feRegistro,
-             movimientoId;
-
-
-
+          AND m.activoId = @activoid
+    ORDER BY al.feRegistro;
 END;
 GO

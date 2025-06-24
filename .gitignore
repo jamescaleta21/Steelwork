@@ -37,6 +37,7 @@ Desktop.ini
 *.bat
 *.log
 *.iss
+*.bak
 
 # Archivos específicos de VB6
 *.vbw  # Contiene información del entorno, no necesaria

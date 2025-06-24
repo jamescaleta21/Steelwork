@@ -39,7 +39,8 @@ BEGIN
                'X'
         FROM sw.CATEGORIA c
         WHERE c.codCia = @codCia
-              AND c.descripcion = @descripcion and isnull(c.eliminado,'') = 0
+              AND c.descripcion = @descripcion
+              AND COALESCE(c.eliminado, 0) = 0
     )
     BEGIN
         SET @message = 'Descripción ingresada existente.';

@@ -40,6 +40,7 @@ BEGIN
         FROM sw.UBICACION u
         WHERE u.codCia = @codCia
               AND u.denominacion = @denominacion
+              AND COALESCE(u.eliminado, 0) = 0
     )
     BEGIN
         SET @message = 'Descripción ingresada existente.';

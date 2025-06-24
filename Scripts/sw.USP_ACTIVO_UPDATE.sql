@@ -69,6 +69,7 @@ BEGIN
         FROM sw.ACTIVO a
         WHERE a.codCia = @codCia
               AND a.codigoActivo = @codigoActivo
+              AND COALESCE(a.eliminado, 0) = 0
               AND a.activoId <> @activoId
     )
     BEGIN
@@ -84,6 +85,7 @@ BEGIN
         FROM sw.ACTIVO a
         WHERE a.codCia = @codCia
               AND a.descripcion = @descripcion
+              AND COALESCE(a.eliminado, 0) = 0
               AND a.activoId <> @activoId
     )
     BEGIN

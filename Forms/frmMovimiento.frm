@@ -44,21 +44,25 @@ Begin VB.Form frmMovimiento
       TabCaption(0)   =   "Movimiento"
       TabPicture(0)   =   "frmMovimiento.frx":0ECA
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1"
-      Tab(0).Control(1)=   "Label2"
-      Tab(0).Control(2)=   "Label3"
-      Tab(0).Control(3)=   "Label4"
-      Tab(0).Control(4)=   "Label5"
-      Tab(0).Control(5)=   "Label6"
-      Tab(0).Control(6)=   "Label7"
-      Tab(0).Control(7)=   "lblMovimientoID"
-      Tab(0).Control(8)=   "DatUbicacionDestino"
-      Tab(0).Control(9)=   "DatResponsableDestino"
-      Tab(0).Control(10)=   "DatResponsableOrigen"
-      Tab(0).Control(11)=   "DatActivo"
-      Tab(0).Control(12)=   "dtpFechaMovimiento"
-      Tab(0).Control(13)=   "txtObservacion"
-      Tab(0).ControlCount=   14
+      Tab(0).Control(0)=   "lvActivoRegister"
+      Tab(0).Control(1)=   "txtActivo"
+      Tab(0).Control(2)=   "txtObservacion"
+      Tab(0).Control(3)=   "dtpFechaMovimiento"
+      Tab(0).Control(4)=   "DatResponsableOrigen"
+      Tab(0).Control(5)=   "DatResponsableDestino"
+      Tab(0).Control(6)=   "DatUbicacionDestino"
+      Tab(0).Control(7)=   "lblUbicacionRegister"
+      Tab(0).Control(8)=   "Label11"
+      Tab(0).Control(9)=   "lblActivoId"
+      Tab(0).Control(10)=   "lblMovimientoID"
+      Tab(0).Control(11)=   "Label7"
+      Tab(0).Control(12)=   "Label6"
+      Tab(0).Control(13)=   "Label5"
+      Tab(0).Control(14)=   "Label4"
+      Tab(0).Control(15)=   "Label3"
+      Tab(0).Control(16)=   "Label2"
+      Tab(0).Control(17)=   "Label1"
+      Tab(0).ControlCount=   18
       TabCaption(1)   =   "Listado"
       TabPicture(1)   =   "frmMovimiento.frx":0EE6
       Tab(1).ControlEnabled=   -1  'True
@@ -70,15 +74,84 @@ Begin VB.Form frmMovimiento
       Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Label10"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "DatActivoSearch"
+      Tab(1).Control(4)=   "lblActivoIdSearch"
       Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "lvDetalle"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).ControlCount=   6
+      Tab(1).Control(6)=   "txtActivoSearch"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "lvActivoSearch"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "cmdPrint"
+      Tab(1).Control(8).Enabled=   0   'False
+      Tab(1).ControlCount=   9
+      Begin VB.CommandButton cmdPrint 
+         Height          =   315
+         Left            =   10320
+         Picture         =   "frmMovimiento.frx":0F02
+         Style           =   1  'Graphical
+         TabIndex        =   28
+         Top             =   1560
+         Width           =   495
+      End
+      Begin MSComctlLib.ListView lvActivoRegister 
+         Height          =   1455
+         Left            =   -71400
+         TabIndex        =   25
+         Top             =   1995
+         Width           =   5775
+         _ExtentX        =   10186
+         _ExtentY        =   2566
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         HideColumnHeaders=   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   0
+      End
+      Begin VB.TextBox txtActivo 
+         Height          =   300
+         Left            =   -71400
+         TabIndex        =   23
+         Top             =   1680
+         Width           =   4095
+      End
+      Begin MSComctlLib.ListView lvActivoSearch 
+         Height          =   1695
+         Left            =   1800
+         TabIndex        =   8
+         Top             =   960
+         Width           =   5895
+         _ExtentX        =   10398
+         _ExtentY        =   2990
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         HideColumnHeaders=   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   0
+      End
+      Begin VB.TextBox txtActivoSearch 
+         Height          =   300
+         Left            =   1800
+         TabIndex        =   1
+         Top             =   600
+         Width           =   8895
+      End
       Begin MSComctlLib.ListView lvDetalle 
          Height          =   4575
          Left            =   120
-         TabIndex        =   8
+         TabIndex        =   7
          Top             =   1920
          Width           =   10815
          _ExtentX        =   19076
@@ -98,40 +171,29 @@ Begin VB.Form frmMovimiento
       Begin VB.TextBox txtObservacion 
          Height          =   1335
          Left            =   -71400
-         TabIndex        =   7
+         MultiLine       =   -1  'True
+         TabIndex        =   6
          Tag             =   "X"
-         Top             =   4800
+         Top             =   4560
          Width           =   5775
       End
       Begin MSComCtl2.DTPicker dtpFechaMovimiento 
          Height          =   300
          Left            =   -71400
-         TabIndex        =   3
-         Top             =   2280
+         TabIndex        =   2
+         Top             =   2640
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   189136897
+         Format          =   204603393
          CurrentDate     =   45825
-      End
-      Begin MSDataListLib.DataCombo DatActivo 
-         Height          =   315
-         Left            =   -71400
-         TabIndex        =   2
-         Top             =   1680
-         Width           =   4095
-         _ExtentX        =   7223
-         _ExtentY        =   556
-         _Version        =   393216
-         Style           =   2
-         Text            =   ""
       End
       Begin MSDataListLib.DataCombo DatResponsableOrigen 
          Height          =   315
          Left            =   -71400
-         TabIndex        =   4
-         Top             =   2880
+         TabIndex        =   3
+         Top             =   3120
          Width           =   4095
          _ExtentX        =   7223
          _ExtentY        =   556
@@ -142,8 +204,8 @@ Begin VB.Form frmMovimiento
       Begin MSDataListLib.DataCombo DatResponsableDestino 
          Height          =   315
          Left            =   -71400
-         TabIndex        =   5
-         Top             =   3480
+         TabIndex        =   4
+         Top             =   3600
          Width           =   4095
          _ExtentX        =   7223
          _ExtentY        =   556
@@ -154,8 +216,8 @@ Begin VB.Form frmMovimiento
       Begin MSDataListLib.DataCombo DatUbicacionDestino 
          Height          =   315
          Left            =   -71400
-         TabIndex        =   6
-         Top             =   4200
+         TabIndex        =   5
+         Top             =   4080
          Width           =   4095
          _ExtentX        =   7223
          _ExtentY        =   556
@@ -163,17 +225,49 @@ Begin VB.Form frmMovimiento
          Style           =   2
          Text            =   ""
       End
-      Begin MSDataListLib.DataCombo DatActivoSearch 
-         Height          =   315
-         Left            =   1800
-         TabIndex        =   1
+      Begin VB.Label lblUbicacionRegister 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BorderStyle     =   1  'Fixed Single
+         ForeColor       =   &H80000008&
+         Height          =   300
+         Left            =   -71400
+         TabIndex        =   27
+         Tag             =   "X"
+         Top             =   2160
+         Width           =   4095
+      End
+      Begin VB.Label Label11 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Ubicación Actual:"
+         Height          =   195
+         Left            =   -72960
+         TabIndex        =   26
+         Top             =   2213
+         Width           =   1470
+      End
+      Begin VB.Label lblActivoId 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Label11"
+         Height          =   195
+         Left            =   -68280
+         TabIndex        =   24
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   660
+      End
+      Begin VB.Label lblActivoIdSearch 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Label11"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   22
          Top             =   600
-         Width           =   8895
-         _ExtentX        =   15690
-         _ExtentY        =   556
-         _Version        =   393216
-         Style           =   2
-         Text            =   ""
+         Visible         =   0   'False
+         Width           =   660
       End
       Begin VB.Label Label10 
          Alignment       =   2  'Center
@@ -186,7 +280,7 @@ Begin VB.Form frmMovimiento
          Left            =   120
          TabIndex        =   21
          Top             =   1560
-         Width           =   10815
+         Width           =   10095
       End
       Begin VB.Label lblUbicacion 
          Appearance      =   0  'Flat
@@ -229,7 +323,7 @@ Begin VB.Form frmMovimiento
          Left            =   -71400
          TabIndex        =   17
          Tag             =   "X"
-         Top             =   1080
+         Top             =   1200
          Width           =   1575
       End
       Begin VB.Label Label7 
@@ -239,7 +333,7 @@ Begin VB.Form frmMovimiento
          Height          =   195
          Left            =   -72615
          TabIndex        =   16
-         Top             =   4800
+         Top             =   4560
          Width           =   1140
       End
       Begin VB.Label Label6 
@@ -249,7 +343,7 @@ Begin VB.Form frmMovimiento
          Height          =   195
          Left            =   -73065
          TabIndex        =   15
-         Top             =   4260
+         Top             =   4140
          Width           =   1590
       End
       Begin VB.Label Label5 
@@ -259,7 +353,7 @@ Begin VB.Form frmMovimiento
          Height          =   195
          Left            =   -73320
          TabIndex        =   14
-         Top             =   3540
+         Top             =   3660
          Width           =   1860
       End
       Begin VB.Label Label4 
@@ -269,7 +363,7 @@ Begin VB.Form frmMovimiento
          Height          =   195
          Left            =   -73260
          TabIndex        =   13
-         Top             =   2940
+         Top             =   3180
          Width           =   1785
       End
       Begin VB.Label Label3 
@@ -279,7 +373,7 @@ Begin VB.Form frmMovimiento
          Height          =   195
          Left            =   -73080
          TabIndex        =   12
-         Top             =   2333
+         Top             =   2693
          Width           =   1605
       End
       Begin VB.Label Label2 
@@ -299,7 +393,7 @@ Begin VB.Form frmMovimiento
          Height          =   195
          Left            =   -72795
          TabIndex        =   10
-         Top             =   1133
+         Top             =   1253
          Width           =   1320
       End
    End
@@ -316,19 +410,19 @@ Begin VB.Form frmMovimiento
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   4
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmMovimiento.frx":0F02
+            Picture         =   "frmMovimiento.frx":148C
             Key             =   "new"
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmMovimiento.frx":129C
+            Picture         =   "frmMovimiento.frx":1826
             Key             =   "save"
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmMovimiento.frx":1636
+            Picture         =   "frmMovimiento.frx":1BC0
             Key             =   "undo"
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmMovimiento.frx":19D0
+            Picture         =   "frmMovimiento.frx":1F5A
             Key             =   "transfer"
          EndProperty
       EndProperty
@@ -366,44 +460,69 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private loc_key  As Integer
+Private vBuscar As Boolean 'variable para la busqueda de activos
+Private loc_keyA  As Integer
+Private vBuscarA As Boolean 'variable para la busqueda de activos
 
-Private Sub DatActivoSearch_Change()
-Me.lvDetalle.ListItems.Clear
-    On Error GoTo xSearch
+Private Sub cmdPrint_Click()
 
-    If Me.DatActivoSearch.BoundText = -1 Then Exit Sub
-    LimpiaParametros oCmdEjec
-    oCmdEjec.Prepared = True
-    oCmdEjec.CommandText = "[sw].[USP_MOVIMIENTO_SEARCH]"
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@ACTIVOID", adInteger, adParamInput, , Me.DatActivoSearch.BoundText)
-    
-    Set oRSmain = oCmdEjec.Execute
-    
-    If Not oRSmain.EOF Then
-        Me.lblUbicacion.Caption = oRSmain!ubicacion
-        
-        Dim orsT As ADODB.Recordset
+    On Error GoTo xPrint
 
-        Set orsT = oRSmain.NextRecordset
+    If Me.lvDetalle.ListItems.count = 0 Then
+        MsgBox "No hay registros para imprimir.", vbInformation, Pub_Titulo
+    Else
+
+        Dim crParamDefs As CRAXDRT.ParameterFieldDefinitions
+
+        Dim crParamDef  As CRAXDRT.ParameterFieldDefinition
+
+        Dim objCrystal  As New CRAXDRT.APPLICATION
+
+        Dim RutaReporte As String
+
+        LimpiaParametros oCmdEjec
+        oCmdEjec.Prepared = True
+        oCmdEjec.CommandText = "[sw].[USP_MOVIMIENTO_PRINT]"
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@ACTIVOID", adInteger, adParamInput, , Me.lblActivoIdSearch.Caption)
         
-        Dim itemX As Object
+        Set oRSmain = oCmdEjec.Execute
         
-        Do While Not orsT.EOF
-            Set itemX = Me.lvDetalle.ListItems.Add(, , IIf(IsNull(orsT!movimientoId), "", orsT!movimientoId), Me.iMovimiento.ListImages(4).key, Me.iMovimiento.ListImages(4).key)
-            itemX.SubItems(1) = orsT!fechaMovimiento
-            itemX.SubItems(2) = IIf(IsNull(orsT!responsableOrigen), "", orsT!responsableOrigen)
-            itemX.SubItems(3) = IIf(IsNull(orsT!responsableDestino), "", orsT!responsableDestino)
-            itemX.SubItems(4) = orsT!ubicacion
-            itemX.SubItems(5) = orsT!tipoMovimiento
-            itemX.SubItems(6) = orsT!cuRegistro
-            orsT.MoveNext
-        Loop
+        If Not oRSmain.EOF Then
+
+            RutaReporte = "C:\Admin\Nordi\MovimientoHistorial.rpt"
+
+            Set VReporte = objCrystal.OpenReport(RutaReporte, 1)
+            Set crParamDefs = VReporte.ParameterFields
+
+            For Each crParamDef In crParamDefs
+
+                Select Case crParamDef.ParameterFieldName
+
+                    Case "pACTIVO"
+                        crParamDef.AddCurrentValue Me.txtActivoSearch.Text
+
+                    Case "pUSUARIO"
+                        crParamDef.AddCurrentValue LK_CODUSU
+
+                End Select
+
+            Next
+            VReporte.Database.SetDataSource oRSmain, , 1
+            frmVisor.crvVisor.ReportSource = VReporte
+            frmVisor.Caption = "Reporte Historico de Movimientos de Activos"
+            frmVisor.crvVisor.ViewReport
+            frmVisor.Show
+            Set objCrystal = Nothing
+            Set VReporte = Nothing
+
+        End If
 
     End If
-    
+
     Exit Sub
-xSearch:
+xPrint:
     MsgBox Err.Description, vbCritical, Pub_Titulo
 
 End Sub
@@ -416,9 +535,7 @@ Private Sub Form_Load()
 CentrarFormulario MDIForm1, Me
 Estado_Botones InicializarFormulario
 DesactivarControles Me
-Me.DatActivoSearch.Enabled = True
 configuraLV
-llenaComboActivo
 Me.tbMovimiento.ImageList = Me.iMovimiento
 Me.tbMovimiento.Buttons(1).Image = Me.iMovimiento.ListImages(1).index
 Me.tbMovimiento.Buttons(2).Image = Me.iMovimiento.ListImages(2).index
@@ -433,7 +550,8 @@ Private Sub Estado_Botones(val As Valores)
             Me.tbMovimiento.Buttons(1).Enabled = True
             Me.tbMovimiento.Buttons(2).Enabled = False
             Me.tbMovimiento.Buttons(3).Enabled = False
-          
+            Me.lvDetalle.Enabled = True
+            Me.lvDetalle.ListItems.Clear
             Me.SSTMovimiento.tab = 1
 
         Case Nuevo
@@ -443,7 +561,6 @@ Private Sub Estado_Botones(val As Valores)
           
             Me.lvDetalle.Enabled = False
             Me.SSTMovimiento.tab = 0
-
 
     End Select
 
@@ -465,38 +582,32 @@ Private Sub tbMovimiento_ButtonClick(ByVal Button As MSComctlLib.Button)
             oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
             
             Set oRSmain = oCmdEjec.Execute
-            
-            Set Me.DatActivo.RowSource = oRSmain
-            Me.DatActivo.BoundColumn = oRSmain.Fields(0).Name
-            Me.DatActivo.ListField = oRSmain.Fields(1).Name
-            Me.DatActivo.BoundText = -1
-            
-            Dim orsT As ADODB.Recordset
-
-            Set orsT = oRSmain.NextRecordset
-            Set Me.DatResponsableOrigen.RowSource = orsT
-            Me.DatResponsableOrigen.BoundColumn = orsT.Fields(0).Name
-            Me.DatResponsableOrigen.ListField = orsT.Fields(1).Name
+    
+            Set Me.DatResponsableOrigen.RowSource = oRSmain
+            Me.DatResponsableOrigen.BoundColumn = oRSmain.Fields(0).Name
+            Me.DatResponsableOrigen.ListField = oRSmain.Fields(1).Name
             Me.DatResponsableOrigen.BoundText = -1
                 
-            Set Me.DatResponsableDestino.RowSource = orsT
-            Me.DatResponsableDestino.BoundColumn = orsT.Fields(0).Name
-            Me.DatResponsableDestino.ListField = orsT.Fields(1).Name
+            Set Me.DatResponsableDestino.RowSource = oRSmain
+            Me.DatResponsableDestino.BoundColumn = oRSmain.Fields(0).Name
+            Me.DatResponsableDestino.ListField = oRSmain.Fields(1).Name
             Me.DatResponsableDestino.BoundText = -1
                 
+            Dim orsT As ADODB.Recordset
+
             Set orsT = oRSmain.NextRecordset
             Set Me.DatUbicacionDestino.RowSource = orsT
             Me.DatUbicacionDestino.BoundColumn = orsT.Fields(0).Name
             Me.DatUbicacionDestino.ListField = orsT.Fields(1).Name
             Me.DatUbicacionDestino.BoundText = -1
             
-            Me.DatActivo.SetFocus
+            Me.txtActivo.SetFocus
             
         Case 2 'Grabar
         
-            If Me.DatActivo.BoundText = -1 Then
+            If Me.lblActivoId.Caption = "" Then
                 MsgBox "Debe elegir el Activo.", vbInformation, Pub_Titulo
-                Me.DatActivo.SetFocus
+                Me.txtActivo.SetFocus
             ElseIf Me.DatResponsableOrigen.BoundText = -1 Then
                 MsgBox "Debe elegir el Responsable Origen.", vbInformation, Pub_Titulo
                 Me.DatResponsableOrigen.SetFocus
@@ -515,7 +626,7 @@ Private Sub tbMovimiento_ButtonClick(ByVal Button As MSComctlLib.Button)
                 oCmdEjec.CommandText = "[sw].[USP_MOVIMIENTO_REGISTER]"
         
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@ACTIVOID", adInteger, adParamInput, , Me.DatActivo.BoundText)
+                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@ACTIVOID", adInteger, adParamInput, , Me.lblActivoId.Caption)
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHAMOVIMIENTO", adDBTimeStamp, adParamInput, , Me.dtpFechaMovimiento.Value)
                  
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@RESPONSABLEORIGENID", adInteger, adParamInput, , Me.DatResponsableOrigen.BoundText)
@@ -542,53 +653,327 @@ Private Sub tbMovimiento_ButtonClick(ByVal Button As MSComctlLib.Button)
 
         Case 3 'Cancelar
             Estado_Botones cancelar
+            Me.lvDetalle.ListItems.Clear
             DesactivarControles Me
             Me.lvDetalle.Enabled = True
-            Me.DatActivoSearch.Enabled = True
-            Me.DatActivoSearch.SetFocus
 
     End Select
 
 End Sub
 
 Private Sub configuraLV()
-Me.lvDetalle.Icons = Me.iMovimiento
-Me.lvDetalle.SmallIcons = Me.iMovimiento
-With Me.lvDetalle
-.HideColumnHeaders = False
-    .FullRowSelect = True
-    .Gridlines = True
-    .ColumnHeaders.Add , , "movimientoID"
-    .ColumnHeaders.Add , , "Fecha Movimiento"
-    .ColumnHeaders.Add , , "Responsable Origen"
-    .ColumnHeaders.Add , , "Responsable Destino"
-    .ColumnHeaders.Add , , "Ubicacion"
-    .ColumnHeaders.Add , , "Movimiento"
-    .ColumnHeaders.Add , , "Realizado Por"
-End With
+    Me.lvDetalle.Icons = Me.iMovimiento
+    Me.lvDetalle.SmallIcons = Me.iMovimiento
+
+    With Me.lvDetalle
+        .HideColumnHeaders = False
+        .FullRowSelect = True
+        .Gridlines = True
+        .ColumnHeaders.Add , , "movimientoID"
+        .ColumnHeaders.Add , , "Fecha Movimiento"
+        .ColumnHeaders.Add , , "Responsable Origen"
+        .ColumnHeaders.Add , , "Responsable Destino"
+        .ColumnHeaders.Add , , "Ubicacion"
+        .ColumnHeaders.Add , , "Movimiento"
+        .ColumnHeaders.Add , , "Realizado Por"
+
+    End With
+    
+    With Me.lvActivoSearch
+        .HideColumnHeaders = True
+        .FullRowSelect = True
+        .Gridlines = True
+        .ColumnHeaders.Add , , "Activo", 5000
+        .Visible = False
+
+    End With
+
+    With Me.lvActivoRegister
+        .HideColumnHeaders = True
+        .FullRowSelect = True
+        .Gridlines = True
+        .ColumnHeaders.Add , , "Activo", 5000
+        .Visible = False
+
+    End With
+
 End Sub
 
-Private Sub llenaComboActivo()
+Private Sub txtActivo_Change()
+vBuscarA = True
+End Sub
 
-    On Error GoTo xLlena
+Private Sub txtActivo_GotFocus()
+vBuscarA = True
+Me.txtActivo.SelStart = 0
+Me.txtActivo.SelLength = Len(Me.txtActivoSearch.Text)
+End Sub
 
-    LimpiaParametros oCmdEjec
-    oCmdEjec.Prepared = True
-    oCmdEjec.CommandText = "[sw].[USP_MOVIMIENTO_LOAD_ACTIVO]"
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+Private Sub txtActivo_KeyDown(KeyCode As Integer, Shift As Integer)
 
-    Set oRSmain = oCmdEjec.Execute
+    On Error GoTo SALE
 
-    If Not oRSmain.EOF Then
-        Set Me.DatActivoSearch.RowSource = oRSmain
-        Me.DatActivoSearch.BoundColumn = oRSmain.Fields(0).Name
-        Me.DatActivoSearch.ListField = oRSmain.Fields(1).Name
-        Me.DatActivoSearch.BoundText = -1
+    Dim strFindMe As String
+
+    Dim itmFound  As Object ' ListItem    ' Variable FoundItem.
+
+    If KeyCode = 40 Then  ' flecha abajo
+        loc_keyA = loc_keyA + 1
+
+        If loc_keyA > Me.lvActivoRegister.ListItems.count Then loc_keyA = Me.lvActivoRegister.ListItems.count
+        GoTo posicion
 
     End If
 
+    If KeyCode = 38 Then
+        loc_keyA = loc_keyA - 1
+
+        If loc_keyA < 1 Then loc_keyA = 1
+        GoTo posicion
+
+    End If
+
+    If KeyCode = 34 Then
+        loc_keyA = loc_keyA + 17
+
+        If loc_keyA > Me.lvActivoRegister.ListItems.count Then loc_keyA = Me.lvActivoRegister.ListItems.count
+        GoTo posicion
+
+    End If
+
+    If KeyCode = 33 Then
+        loc_keyA = loc_keyA - 17
+
+        If loc_keyA < 1 Then loc_keyA = 1
+        GoTo posicion
+
+    End If
+
+    If KeyCode = 27 Then
+        Me.lvActivoRegister.Visible = False
+       Me.txtActivo.Text = ""
+
+    End If
+
+    GoTo fin
+posicion:
+    Me.lvActivoRegister.ListItems.Item(loc_keyA).Selected = True
+    Me.lvActivoRegister.ListItems.Item(loc_keyA).EnsureVisible
+    'txtRS.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
+    Me.txtActivo.SelStart = Len(txtActivoSearch.Text)
+fin:
+
     Exit Sub
-xLlena:
+
+SALE:
+
+End Sub
+
+Private Sub txtActivo_KeyPress(KeyAscii As Integer)
+    KeyAscii = Mayusculas(KeyAscii)
+
+    If KeyAscii = vbKeyReturn Then
+        If vBuscarA Then
+            Me.lvActivoRegister.ListItems.Clear
+            LimpiaParametros oCmdEjec
+            oCmdEjec.CommandText = "[sw].[USP_MOVIMIENTO_ACTIVO_SEARCH]"
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@SEARCH", adVarChar, adParamInput, 100, Me.txtActivo.Text)
+            Set oRSmain = oCmdEjec.Execute
+
+            Dim Item As Object
+        
+            If Not oRSmain.EOF Then
+
+                Do While Not oRSmain.EOF
+                    Set Item = Me.lvActivoRegister.ListItems.Add(, , oRSmain!DESCRIPCION)
+                    Item.Tag = oRSmain!ACTIVOID
+                    oRSmain.MoveNext
+                Loop
+
+                Me.lvActivoRegister.Visible = True
+                Me.lvActivoRegister.ListItems(1).Selected = True
+                loc_keyA = 1
+                Me.lvActivoRegister.ListItems(1).EnsureVisible
+                vBuscarA = False
+            Else
+
+                MsgBox "Activo no existe.", vbCritical, Pub_Titulo
+
+            End If
+
+        Else
+            Me.txtActivo.Text = Me.lvActivoRegister.ListItems(loc_keyA)
+            Me.lblActivoId.Caption = Me.lvActivoRegister.ListItems(loc_keyA).Tag
+            Me.lvActivoRegister.Visible = False
+            muestraUbicacionActual Me.lblActivoId.Caption, True
+            Me.dtpFechaMovimiento.SetFocus
+
+        End If
+
+    End If
+
+End Sub
+
+Private Sub txtActivoSearch_Change()
+vBuscar = True
+End Sub
+
+Private Sub txtActivoSearch_GotFocus()
+vBuscar = True
+Me.txtActivoSearch.SelStart = 0
+Me.txtActivoSearch.SelLength = Len(Me.txtActivoSearch.Text)
+End Sub
+
+Private Sub txtActivoSearch_KeyDown(KeyCode As Integer, Shift As Integer)
+
+    On Error GoTo SALE
+
+    Dim strFindMe As String
+
+    Dim itmFound  As Object ' ListItem    ' Variable FoundItem.
+
+    If KeyCode = 40 Then  ' flecha abajo
+        loc_key = loc_key + 1
+
+        If loc_key > Me.lvActivoSearch.ListItems.count Then loc_key = Me.lvActivoSearch.ListItems.count
+        GoTo posicion
+
+    End If
+
+    If KeyCode = 38 Then
+        loc_key = loc_key - 1
+
+        If loc_key < 1 Then loc_key = 1
+        GoTo posicion
+
+    End If
+
+    If KeyCode = 34 Then
+        loc_key = loc_key + 17
+
+        If loc_key > Me.lvActivoSearch.ListItems.count Then loc_key = Me.lvActivoSearch.ListItems.count
+        GoTo posicion
+
+    End If
+
+    If KeyCode = 33 Then
+        loc_key = loc_key - 17
+
+        If loc_key < 1 Then loc_key = 1
+        GoTo posicion
+
+    End If
+
+    If KeyCode = 27 Then
+        Me.lvActivoSearch.Visible = False
+       Me.txtActivoSearch.Text = ""
+
+    End If
+
+    GoTo fin
+posicion:
+    Me.lvActivoSearch.ListItems.Item(loc_key).Selected = True
+    Me.lvActivoSearch.ListItems.Item(loc_key).EnsureVisible
+    'txtRS.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
+    txtActivoSearch.SelStart = Len(txtActivoSearch.Text)
+fin:
+
+    Exit Sub
+
+SALE:
+
+End Sub
+
+Private Sub txtActivoSearch_KeyPress(KeyAscii As Integer)
+    KeyAscii = Mayusculas(KeyAscii)
+
+    If KeyAscii = vbKeyReturn Then
+        If vBuscar Then
+            Me.lvActivoSearch.ListItems.Clear
+            LimpiaParametros oCmdEjec
+            oCmdEjec.CommandText = "[sw].[USP_MOVIMIENTO_ACTIVO_SEARCH]"
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@SEARCH", adVarChar, adParamInput, 100, Me.txtActivoSearch.Text)
+            Set oRSmain = oCmdEjec.Execute
+
+            Dim Item As Object
+        
+            If Not oRSmain.EOF Then
+
+                Do While Not oRSmain.EOF
+                    Set Item = Me.lvActivoSearch.ListItems.Add(, , oRSmain!DESCRIPCION)
+                    Item.Tag = oRSmain!ACTIVOID
+                    oRSmain.MoveNext
+                Loop
+
+                Me.lvActivoSearch.Visible = True
+                Me.lvActivoSearch.ListItems(1).Selected = True
+                loc_key = 1
+                Me.lvActivoSearch.ListItems(1).EnsureVisible
+                vBuscar = False
+            Else
+
+                MsgBox "Activo no existe.", vbCritical, Pub_Titulo
+
+            End If
+
+        Else
+            Me.txtActivoSearch.Text = Me.lvActivoSearch.ListItems(loc_key)
+            Me.lblActivoIdSearch.Caption = Me.lvActivoSearch.ListItems(loc_key).Tag
+            Me.lvActivoSearch.Visible = False
+            muestraUbicacionActual Me.lblActivoIdSearch.Caption, False
+            Me.lvDetalle.SetFocus
+
+        End If
+
+    End If
+
+End Sub
+
+Private Sub muestraUbicacionActual(dIDactivo As Integer, dMuestraenRegistro As Boolean)
+    Me.lvDetalle.ListItems.Clear
+
+    On Error GoTo xSearch
+
+    LimpiaParametros oCmdEjec
+    oCmdEjec.Prepared = True
+    oCmdEjec.CommandText = "[sw].[USP_MOVIMIENTO_SEARCH]"
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@ACTIVOID", adInteger, adParamInput, , dIDactivo)
+    
+    Set oRSmain = oCmdEjec.Execute
+    
+    If Not oRSmain.EOF Then
+        If dMuestraenRegistro Then
+            Me.lblUbicacionRegister.Caption = oRSmain!ubicacion
+            Me.DatResponsableOrigen.BoundText = oRSmain!responsableid
+        Else
+            Me.lblUbicacion.Caption = oRSmain!ubicacion
+
+        End If
+        
+        Dim orsT As ADODB.Recordset
+
+        Set orsT = oRSmain.NextRecordset
+        
+        Dim itemX As Object
+        
+        Do While Not orsT.EOF
+            Set itemX = Me.lvDetalle.ListItems.Add(, , IIf(IsNull(orsT!movimientoId), "", orsT!movimientoId), Me.iMovimiento.ListImages(4).key, Me.iMovimiento.ListImages(4).key)
+            itemX.SubItems(1) = orsT!fechaMovimiento
+            itemX.SubItems(2) = IIf(IsNull(orsT!responsableOrigen), "", orsT!responsableOrigen)
+            itemX.SubItems(3) = IIf(IsNull(orsT!responsableDestino), "", orsT!responsableDestino)
+            itemX.SubItems(4) = orsT!ubicacion
+            itemX.SubItems(5) = orsT!tipoMovimiento
+            itemX.SubItems(6) = orsT!cuRegistro
+            orsT.MoveNext
+        Loop
+
+    End If
+    
+    Exit Sub
+xSearch:
     MsgBox Err.Description, vbCritical, Pub_Titulo
 
 End Sub

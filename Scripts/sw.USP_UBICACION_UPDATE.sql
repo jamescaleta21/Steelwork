@@ -40,6 +40,7 @@ BEGIN
         FROM sw.UBICACION u
         WHERE u.codCia = @codCia
               AND u.denominacion = @denominacion
+              AND COALESCE(u.eliminado, 0) = 0
               AND u.ubicacionId <> @ubicacionId
     )
     BEGIN
@@ -55,7 +56,7 @@ BEGIN
         UPDATE sw.UBICACION
         SET denominacion = @denominacion,
             cuRegistro = @cuRegistro,
-			feRegistro = GETDATE()
+            feRegistro = GETDATE()
         WHERE codCia = @codCia
               AND ubicacionId = @ubicacionId;
 

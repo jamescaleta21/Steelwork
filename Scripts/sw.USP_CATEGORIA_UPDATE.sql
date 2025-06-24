@@ -37,9 +37,10 @@ BEGIN
     (
         SELECT TOP 1
                'X'
-        FROM sw.ACTIVO a
+        FROM sw.CATEGORIA a
         WHERE a.codCia = @codCia
               AND a.descripcion = @descripcion
+              AND COALESCE(a.eliminado, 0) = 0
               AND a.categoriaId <> @categoriaId
     )
     BEGIN
@@ -56,7 +57,7 @@ BEGIN
         UPDATE sw.CATEGORIA
         SET descripcion = @descripcion,
             cuRegistro = @cuRegistro,
-			feRegistro = GETDATE()
+            feRegistro = GETDATE()
         WHERE codCia = @codCia
               AND categoriaId = @categoriaId;
 

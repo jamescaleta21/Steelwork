@@ -82,6 +82,20 @@ BEGIN
         GOTO Terminar;
     END;
 
+    IF
+    (
+        SELECT TOP 1
+               a.responsableId
+        FROM sw.ACTIVO a
+        WHERE a.activoId = @activoId
+              AND a.codCia = @codcia
+    ) <> @responsableOrigenId
+    BEGIN
+        SET @message = 'El responsable de Origen no es correcto.';
+        SET @code = -7;
+        GOTO Terminar;
+    END;
+
     -- Obtener el siguiente activoId
     SELECT @movimientoId = ISNULL(MAX(a.movimientoId), 0) + 1
     FROM [sw].[MOVIMIENTO] a
@@ -117,7 +131,7 @@ BEGIN
         UPDATE sw.ACTIVO
         SET responsableId = @responsableDestinoId,
             ubicacionId = @ubicacionDestinoId,
-			feRegistro = GETDATE()
+            feRegistro = GETDATE()
         WHERE codCia = @codcia
               AND activoId = @activoId;
 

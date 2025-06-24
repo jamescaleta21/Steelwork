@@ -19,17 +19,6 @@ WITH ENCRYPTION
 AS
 SET NOCOUNT ON;
 
-SELECT -1 AS activoId,
-       '.: SELECCIONE :.' AS descripcion
-UNION
-SELECT a.activoId,
-       a.descripcion
-FROM sw.ACTIVO a
-WHERE a.activo = 1
-      AND a.eliminado = 0
-ORDER BY 2;
-
-
 SELECT -1 AS responsableId,
        '.: SELECCIONE :.' AS nombres
 UNION

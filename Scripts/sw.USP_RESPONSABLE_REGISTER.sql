@@ -40,7 +40,9 @@ BEGIN
                'X'
         FROM sw.RESPONSABLE p
         WHERE p.codCia = @codCia
-              AND p.nombres = @nombres AND p.apellidos = @apellidos
+              AND p.nombres = @nombres
+              AND p.apellidos = @apellidos
+			  AND COALESCE(p.eliminado,0) = 0
     )
     BEGIN
         SET @message = 'Nombres y Apellidos ingresados existentes.';

@@ -41,7 +41,8 @@ BEGIN
         FROM sw.RESPONSABLE p
         WHERE p.codCia = @codCia
               AND p.nombres = @nombres
-              AND @apellidos = @apellidos
+              AND p.apellidos = @apellidos
+              AND COALESCE(p.eliminado, 0) = 0
               AND p.responsableId <> @responsableId
     )
     BEGIN
@@ -58,7 +59,7 @@ BEGIN
         SET nombres = @nombres,
             apellidos = @apellidos,
             cuRegistro = @cuRegistro,
-			feRegistro = GETDATE()
+            feRegistro = GETDATE()
         WHERE codCia = @codCia
               AND responsableId = @responsableId;
 
